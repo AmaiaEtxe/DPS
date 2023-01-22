@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Pregunta.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Obligatorio</a> &gt; <a href="index.source.html" class="el_package">com.barrios_irabedra.obligatorio.dominio</a> &gt; <span class="el_source">Pregunta.java</span></div><h1>Pregunta.java</h1><pre class="source lang-java linenums">package com.barrios_irabedra.obligatorio.dominio;
+
+// @author Juan Barrios, Juan Irabedra
+import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
+
+public abstract class Pregunta {
+
+    private String pregunta;
+    private int tiempo;
+    private HashMap&lt;String, Boolean&gt; respuestas;
+    private SimpleIntegerProperty segundosRestantes;
+    private TimerPregunta timerPregunta;
+
+    //Acceso y modificacion
+    public String getPregunta() {
+<span class="fc" id="L20">        return pregunta;</span>
+    }
+
+    public void setPregunta(String pregunta) {
+<span class="fc" id="L24">        this.pregunta = pregunta;</span>
+<span class="fc" id="L25">    }</span>
+
+    public int getTiempo() {
+<span class="fc" id="L28">        return tiempo;</span>
+    }
+
+    public void setTiempo(int tiempo) {
+<span class="nc" id="L32">        this.tiempo = tiempo;</span>
+<span class="nc" id="L33">    }</span>
+
+    public SimpleIntegerProperty getSegundosRestantes() {
+<span class="nc" id="L36">        return segundosRestantes;</span>
+    }
+
+    public void setSegundosRestantes(SimpleIntegerProperty 
+            segundosRestantes) {
+<span class="nc" id="L41">        this.segundosRestantes = segundosRestantes;</span>
+<span class="nc" id="L42">    }</span>
+
+    public void disminuirTiempoRestante() {
+<span class="nc" id="L45">        Platform.runLater(() -&gt; {</span>
+<span class="nc" id="L46">            this.getSegundosRestantes().set(</span>
+<span class="nc" id="L47">                    getSegundosRestantes().subtract(1).get());</span>
+<span class="nc" id="L48">        });</span>
+<span class="nc" id="L49">    }</span>
+
+    public void agregarRespuesta(String respuesta, 
+            Boolean valorVerdad) {
+<span class="fc" id="L53">        this.respuestas.put(respuesta, valorVerdad);</span>
+<span class="fc" id="L54">    }</span>
+
+    public String getRespuestas() {
+<span class="fc" id="L57">        return this.respuestas.toString();</span>
+    }
+
+    public HashMap&lt;String, Boolean&gt; getMapaRespuestas() {
+<span class="fc" id="L61">        return this.respuestas;</span>
+    }
+
+    //Constructor con params
+    public Pregunta(String nombre, int tiempo, 
+<span class="fc" id="L66">            HashMap&lt;String, Boolean&gt; respuestas) {</span>
+<span class="fc" id="L67">        this.pregunta = nombre;</span>
+<span class="fc" id="L68">        this.tiempo = tiempo;</span>
+<span class="fc" id="L69">        this.respuestas = respuestas;</span>
+<span class="fc" id="L70">        this.segundosRestantes </span>
+                = new SimpleIntegerProperty(tiempo);
+<span class="fc" id="L72">        this.timerPregunta = new TimerPregunta();</span>
+<span class="fc" id="L73">    }</span>
+
+    //Constructor sin params.
+<span class="fc" id="L76">    public Pregunta() {</span>
+<span class="fc" id="L77">        this.tiempo = 30;</span>
+<span class="fc" id="L78">        this.respuestas = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L79">        this.segundosRestantes </span>
+                = new SimpleIntegerProperty(this.tiempo);
+<span class="fc" id="L81">        this.timerPregunta = new TimerPregunta();</span>
+<span class="fc" id="L82">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L86">        return this.getPregunta() + &quot;. \n&quot; + &quot;Tienes &quot; + </span>
+<span class="nc" id="L87">                this.getTiempo() </span>
+                + &quot; segundos para responder. \n&quot;
+                + &quot;Y sus respuestas eran &quot; 
+<span class="nc" id="L90">                + this.getRespuestas();</span>
+    }
+
+<span class="fc" id="L93">    private class TimerPregunta extends TimerTask {</span>
+
+        @Override
+        public void run() {
+<span class="nc bnc" id="L97" title="All 2 branches missed.">            if (getSegundosRestantes().get() &gt; 0) {</span>
+<span class="nc" id="L98">                disminuirTiempoRestante();</span>
+            } else {
+<span class="nc" id="L100">                stop();</span>
+            }
+<span class="nc" id="L102">        }</span>
+    }
+
+    public void stop() {
+<span class="nc" id="L106">        this.timerPregunta.cancel();</span>
+<span class="nc" id="L107">    }</span>
+
+    public void start() {
+<span class="nc" id="L110">        Timer timer = new Timer();</span>
+<span class="nc" id="L111">        timer.scheduleAtFixedRate(timerPregunta, 0, 1000);</span>
+<span class="nc" id="L112">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

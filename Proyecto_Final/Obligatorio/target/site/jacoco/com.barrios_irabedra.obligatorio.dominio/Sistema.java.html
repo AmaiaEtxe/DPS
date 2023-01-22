@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Sistema.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Obligatorio</a> &gt; <a href="index.source.html" class="el_package">com.barrios_irabedra.obligatorio.dominio</a> &gt; <span class="el_source">Sistema.java</span></div><h1>Sistema.java</h1><pre class="source lang-java linenums">package com.barrios_irabedra.obligatorio.dominio;
+
+import com.itextpdf.text.*;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ *
+ * @author Usuario
+ */
+<span class="pc bpc" id="L20" title="1 of 2 branches missed.">public class Sistema {</span>
+    
+    public static Sistema getInstanciaSistema() {
+<span class="fc" id="L23">        return instanciaSistema;</span>
+    }
+
+    private List&lt;PreguntaCortaRespuesta&gt; 
+            listaPreguntasCortaRespuesta;
+    private List&lt;PreguntaMultipleOpcion&gt; 
+            listaPreguntasMultipleOpcion;
+    private List&lt;PreguntaVF&gt; listaPreguntasVF;
+    private HashMap&lt;Pregunta, String&gt; respuestasSeleccionadas;
+    private static Sistema instanciaSistema;
+
+<span class="fc" id="L34">    public Sistema() {</span>
+<span class="fc" id="L35">        this.listaPreguntasCortaRespuesta = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L36">        this.listaPreguntasMultipleOpcion = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L37">        this.listaPreguntasVF = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L38">        this.respuestasSeleccionadas = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L39">    }</span>
+
+    public static Sistema getInstance() {
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (instanciaSistema == null) {</span>
+<span class="fc" id="L43">            instanciaSistema = new Sistema();</span>
+        }
+<span class="fc" id="L45">        return instanciaSistema;</span>
+    }
+
+    /**
+     * Procesa los archivos
+     *
+     * @param files son los archivos que se arrastran y dejan en
+     * la venta
+     */
+    public void recibirArchivos(List&lt;File&gt; files) {
+<span class="nc" id="L55">        filtroTXT(files);</span>
+<span class="nc" id="L56">        cargoArchivos(files);</span>
+<span class="nc" id="L57">    }</span>
+
+    /**
+     * Este metodo elimina de la lista de archivos recibidos los
+     * que no son txt
+     *
+     * @param lista es la lista de archivos cargados por
+     * dragAndDrop
+     */
+    private void filtroTXT(List&lt;File&gt; lista) {
+<span class="nc" id="L67">        Iterator&lt;File&gt; it = lista.iterator();</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        while (it.hasNext()) {</span>
+<span class="nc" id="L69">            File archivo = it.next();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">            if (!checkTXT(archivo)) {</span>
+<span class="nc" id="L71">                lista.remove(archivo);</span>
+            }
+<span class="nc" id="L73">        }</span>
+<span class="nc" id="L74">    }</span>
+
+    /**
+     *
+     * @param unArchivo es el archivo a evaluar
+     * @return true si y solo si es un .txt
+     */
+    private Boolean checkTXT(File unArchivo) {
+<span class="nc" id="L82">        String nombre = unArchivo.getName().toUpperCase();</span>
+<span class="nc" id="L83">        return nombre.endsWith(&quot;.TXT&quot;);</span>
+    }
+
+    /**
+     * Metodo que prepara los archivos para ser procesadas sus
+     * preguntas
+     *
+     * @param lista es la lista de archivos txt que sera cargada
+     * al sistema
+     */
+    private void cargoArchivos(List&lt;File&gt; lista) {
+<span class="nc" id="L94">        Iterator&lt;File&gt; it = lista.iterator();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        while (it.hasNext()) {</span>
+<span class="nc" id="L96">            cargarPreguntas(filtrarArchivo(it.next()));</span>
+        }
+<span class="nc" id="L98">    }</span>
+
+    /**
+     *
+     * @param unArchivo Archivo sobre el que se van a sacar las
+     * preguntas y respuestas
+     * @return Las lineas a cargar
+     */
+    public ArrayList&lt;String&gt; filtrarArchivo(File unArchivo) {
+<span class="nc" id="L107">        ArrayList&lt;String&gt; ret = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L109">            Scanner sc = new Scanner(unArchivo);</span>
+<span class="nc" id="L110">            String linea = &quot;&quot;;</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">            while (sc.hasNext()) {</span>
+<span class="nc" id="L112">                linea = sc.nextLine();</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">                if (this.esLineaConContenido(linea)) {</span>
+<span class="nc" id="L114">                    ret.add(linea);</span>
+                }
+            }
+<span class="nc" id="L117">        } catch (FileNotFoundException ex) {</span>
+<span class="nc" id="L118">            System.err.print(&quot;No se ha encontrado archivo con &quot;</span>
+<span class="nc" id="L119">                    + &quot;nombre: &quot; + unArchivo.getName());</span>
+<span class="nc" id="L120">            ex.printStackTrace();</span>
+<span class="nc" id="L121">        }</span>
+<span class="nc" id="L122">        return ret;</span>
+    }
+
+    /**
+     * true sii no es vacia, comentada o inesperada
+     *
+     * @param linea es la linea leida
+     */
+    public Boolean esLineaConContenido(String linea) {
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        if (linea.trim().length() == 0) {</span>
+<span class="fc" id="L132">            return false;</span>
+        } else {
+<span class="fc" id="L134">            linea = linea.trim();</span>
+<span class="fc" id="L135">            char primerCaracter = linea.charAt(0);</span>
+<span class="fc bfc" id="L136" title="All 8 branches covered.">            switch (primerCaracter) {</span>
+                case '/':
+<span class="fc" id="L138">                    return false;</span>
+                case ':':
+<span class="fc" id="L140">                    return true;</span>
+                case '=':
+<span class="fc" id="L142">                    return true;</span>
+                case '~':
+<span class="fc" id="L144">                    return true;</span>
+                case '#':
+<span class="fc" id="L146">                    return true;</span>
+                case '¿':
+<span class="fc" id="L148">                    return true;</span>
+                case '}':
+<span class="fc" id="L150">                    return true;</span>
+                default:
+<span class="fc" id="L152">                    return false;</span>
+            }
+        }
+    }
+
+    /**
+     * Abre el archivo indicado por el drag and drop y lo delega
+     * otro metodo para procesar
+     *
+     * @param textoFiltrado es el array con las pregunts ya
+     * filtradas
+     */
+    public void cargarPreguntas(ArrayList&lt;String&gt; 
+            textoFiltrado) {
+<span class="nc" id="L166">        Iterator&lt;String&gt; it = textoFiltrado.iterator();</span>
+<span class="nc" id="L167">        boolean comienzoPreguntaMultipleOpcion = false;</span>
+<span class="nc" id="L168">        ArrayList&lt;String&gt; lineasPreguntaMultipleOpcion </span>
+                = new ArrayList&lt;&gt;();
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        while (it.hasNext()) {</span>
+<span class="nc" id="L171">            comienzoPreguntaMultipleOpcion </span>
+<span class="nc" id="L172">                    = procesarLinea(it.next(), </span>
+                            lineasPreguntaMultipleOpcion, 
+                            comienzoPreguntaMultipleOpcion);
+        }
+
+<span class="nc" id="L177">    }</span>
+
+    public boolean procesarLinea(String unaLinea, 
+            ArrayList&lt;String&gt; lineasPreguntaMultipleOpcion, 
+            boolean comienzoPreguntaMultipleOpcion) {
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        if (!comienzoPreguntaMultipleOpcion) {</span>
+<span class="pc bpc" id="L183" title="2 of 4 branches missed.">            switch (ocurrenciasSubtring(unaLinea, &quot;::&quot;)) {</span>
+                case 0:
+<span class="fc" id="L185">                    procesarLineaCortaRespuesta(unaLinea);</span>
+<span class="fc" id="L186">                    break;</span>
+                case 1:
+<span class="fc" id="L188">                    return true;</span>
+                case 2:
+<span class="nc" id="L190">                    procesarLineaVF(unaLinea);</span>
+<span class="nc" id="L191">                    break;</span>
+                default:
+<span class="nc" id="L193">                    System.err.println(&quot;Algo salio muy mal&quot;);</span>
+                    break;
+            }
+        }
+
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        if (unaLinea.equals(&quot;}&quot;)) {</span>
+<span class="fc" id="L199">            comienzoPreguntaMultipleOpcion = false;</span>
+<span class="fc" id="L200">            procesarLineaMultipleOpcion(</span>
+                    lineasPreguntaMultipleOpcion);
+<span class="fc" id="L202">            lineasPreguntaMultipleOpcion.clear();</span>
+        }
+
+<span class="fc bfc" id="L205" title="All 2 branches covered.">        if (comienzoPreguntaMultipleOpcion) {</span>
+<span class="fc" id="L206">            lineasPreguntaMultipleOpcion.add(unaLinea);</span>
+        }
+
+<span class="fc" id="L209">        return comienzoPreguntaMultipleOpcion;</span>
+    }
+
+    public int ocurrenciasSubtring(String unString, 
+            String unSubstring) {
+<span class="fc" id="L214">        int contador = 0;</span>
+<span class="fc" id="L215">        String copia = unString;</span>
+<span class="fc bfc" id="L216" title="All 2 branches covered.">        while (copia.contains(unSubstring)) {</span>
+<span class="fc" id="L217">            copia = copia.replaceFirst(unSubstring, &quot;&quot;);</span>
+<span class="fc" id="L218">            contador++;</span>
+        }
+<span class="fc" id="L220">        return contador;</span>
+    }
+
+    private void procesarLineaCortaRespuesta(String unaLinea) {
+<span class="fc" id="L224">        Pregunta p = new PreguntaCortaRespuesta();</span>
+<span class="fc" id="L225">        StringTokenizer tk = new StringTokenizer(unaLinea, &quot;{&quot;);</span>
+<span class="fc" id="L226">        p.setPregunta(tk.nextToken());</span>
+<span class="fc" id="L227">        String segundoToken = tk.nextToken();</span>
+<span class="fc" id="L228">        segundoToken = segundoToken.replaceAll(&quot;}&quot;, &quot;&quot;);</span>
+<span class="fc" id="L229">        guardoRespuestasCortas(p, segundoToken);</span>
+<span class="fc" id="L230">        this.listaPreguntasCortaRespuesta.add(</span>
+                (PreguntaCortaRespuesta) p);
+<span class="fc" id="L232">    }</span>
+
+    private void guardoRespuestasCortas(Pregunta unaPregunta, 
+            String respuestasTotales) {
+<span class="fc" id="L236">        StringTokenizer tk </span>
+                = new StringTokenizer(respuestasTotales, &quot;=&quot;);
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        while (tk.hasMoreTokens()) {</span>
+<span class="fc" id="L239">            String respuesta = tk.nextToken().trim();</span>
+<span class="fc" id="L240">            unaPregunta.agregarRespuesta(respuesta, true);</span>
+<span class="fc" id="L241">        }</span>
+
+<span class="fc" id="L243">    }</span>
+
+    private void procesarLineaVF(String unaLinea) {
+<span class="nc" id="L246">        Pregunta p = new PreguntaVF();</span>
+<span class="nc" id="L247">        StringTokenizer tk = new StringTokenizer(unaLinea, </span>
+                &quot;::&quot;);
+<span class="nc" id="L249">        String pregunta = tk.nextToken();</span>
+<span class="nc" id="L250">        pregunta = tk.nextToken();</span>
+<span class="nc" id="L251">        pregunta = pregunta.trim();</span>
+<span class="nc" id="L252">        tk = new StringTokenizer(pregunta, &quot;{&quot;);</span>
+<span class="nc" id="L253">        pregunta = tk.nextToken().trim();</span>
+<span class="nc" id="L254">        p.setPregunta(pregunta);</span>
+<span class="nc" id="L255">        String valorVerdad = tk.nextToken();</span>
+<span class="nc" id="L256">        valorVerdad = valorVerdad.toUpperCase();</span>
+<span class="nc" id="L257">        guardoRespuestasVF(p, pregunta, valorVerdad);</span>
+<span class="nc" id="L258">        this.listaPreguntasVF.add((PreguntaVF) p);</span>
+<span class="nc" id="L259">    }</span>
+
+    private void guardoRespuestasVF(Pregunta unaPregunta, 
+            String respuesta, String valorVerdad) {
+<span class="nc bnc" id="L263" title="All 2 branches missed.">        if (valorVerdad.contains(&quot;F&quot;)) {</span>
+<span class="nc" id="L264">            respuesta = &quot;false&quot;;</span>
+<span class="nc" id="L265">            unaPregunta.agregarRespuesta(respuesta, false);</span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">        } else if (valorVerdad.contains(&quot;T&quot;) </span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">                || respuesta.contains(&quot;V&quot;)) {</span>
+<span class="nc" id="L268">            respuesta = &quot;true&quot;;</span>
+<span class="nc" id="L269">            unaPregunta.agregarRespuesta(respuesta, true);</span>
+        } else {
+<span class="nc" id="L271">            System.err.println(&quot;No hay ni Verdadero ni Falso&quot;);</span>
+        }
+<span class="nc" id="L273">    }</span>
+
+    private void procesarLineaMultipleOpcion(
+            ArrayList&lt;String&gt; lineasPreguntaMultipleOpcion) {
+<span class="fc" id="L277">        PreguntaMultipleOpcion p = new PreguntaMultipleOpcion();</span>
+<span class="fc" id="L278">        Iterator&lt;String&gt; it </span>
+<span class="fc" id="L279">                = lineasPreguntaMultipleOpcion.iterator();</span>
+<span class="fc" id="L280">        String pregunta </span>
+<span class="fc" id="L281">                = it.next();//La primera linea es la pregunta.</span>
+<span class="fc" id="L282">        pregunta = limpiarTokenPregunta(pregunta);</span>
+<span class="fc" id="L283">        p.setPregunta(pregunta);</span>
+<span class="fc" id="L284">        String respuesta = &quot;&quot;;</span>
+<span class="fc" id="L285">        String respuestaAnterior = &quot;&quot;;</span>
+<span class="fc bfc" id="L286" title="All 2 branches covered.">        while (it.hasNext()) {</span>
+<span class="fc" id="L287">            respuesta = it.next();</span>
+<span class="pc bpc" id="L288" title="3 of 4 branches missed.">            switch (respuesta.charAt(0)) {</span>
+                case '=':
+<span class="nc" id="L290">                    respuesta = respuesta.replaceFirst(&quot;=&quot;, &quot;&quot;);</span>
+<span class="nc" id="L291">                    p.agregarRespuesta(respuesta, true);</span>
+<span class="nc" id="L292">                    break;</span>
+                case '~':
+<span class="fc" id="L294">                    respuesta = respuesta.replaceFirst(&quot;~&quot;, &quot;&quot;);</span>
+<span class="fc" id="L295">                    p.agregarRespuesta(respuesta, false);</span>
+<span class="fc" id="L296">                    break;</span>
+                case '#':
+<span class="nc" id="L298">                    respuesta = respuesta.replaceFirst(&quot;#&quot;, &quot;&quot;);</span>
+<span class="nc" id="L299">                    p.agregarComentarioRespuesta(</span>
+                            respuestaAnterior, respuesta);
+<span class="nc" id="L301">                    break;</span>
+                default:
+<span class="nc" id="L303">                    System.err.println(&quot;Algo salio muy mal&quot;);</span>
+                    break;
+            }
+<span class="fc" id="L306">            respuestaAnterior = respuesta;</span>
+        }
+<span class="fc" id="L308">        this.listaPreguntasMultipleOpcion.add(p);</span>
+<span class="fc" id="L309">    }</span>
+
+    private String limpiarTokenPregunta(String pregunta) {
+<span class="fc" id="L312">        pregunta = pregunta.replaceFirst(&quot;::&quot;, &quot;&quot;);</span>
+<span class="fc" id="L313">        char[] preguntaFiltrada = pregunta.toCharArray();</span>
+<span class="fc" id="L314">        int posicion = preguntaFiltrada.length - 1;</span>
+<span class="fc" id="L315">        preguntaFiltrada[posicion] = '\0';</span>
+<span class="fc" id="L316">        pregunta = new String(preguntaFiltrada).trim();</span>
+<span class="fc" id="L317">        return pregunta;</span>
+    }
+
+    public List&lt;PreguntaCortaRespuesta&gt; 
+        getListaPreguntasCortaRespuesta() {
+<span class="fc" id="L322">        return listaPreguntasCortaRespuesta;</span>
+    }
+
+    public List&lt;PreguntaMultipleOpcion&gt; 
+        getListaPreguntasMultipleOpcion() {
+<span class="fc" id="L327">        return listaPreguntasMultipleOpcion;</span>
+    }
+
+    public List&lt;PreguntaVF&gt; getListaPreguntasVF() {
+<span class="fc" id="L331">        return listaPreguntasVF;</span>
+    }
+
+    public HashMap&lt;Pregunta, String&gt; 
+        getRespuestasSeleccionadas() {
+<span class="fc" id="L336">        return respuestasSeleccionadas;</span>
+    }
+
+    public void agregarRespuestaSeleccionada(Pregunta p, 
+            String respuestas) {
+<span class="fc" id="L341">        this.respuestasSeleccionadas.put(p, respuestas);</span>
+<span class="fc" id="L342">    }</span>
+
+    /**
+     * Devuelve si la respuesta dada por el usuario esta bien o
+     * mal
+     *
+     * @param p Pregunta en la que se esta evaluando
+     * @param respuesta Respuesta dada por el usuario
+     * @param valorDeVerdad valor de verdad de la respuesta dada
+     * @return
+     */
+    public boolean veracidadRespuesta(Pregunta p, 
+            String respuesta, boolean valorDeVerdad) {
+<span class="fc" id="L355">        respuestasSeleccionadas.put(p, respuesta);</span>
+<span class="pc bpc" id="L356" title="1 of 2 branches missed.">        if (p.getMapaRespuestas().get(respuesta) != null) {</span>
+<span class="nc bnc" id="L357" title="All 2 branches missed.">            if (p instanceof PreguntaVF) {</span>
+<span class="nc bnc" id="L358" title="All 2 branches missed.">                return (p.getMapaRespuestas().get(respuesta) </span>
+                        == valorDeVerdad);
+            } else {
+<span class="nc" id="L361">                return p.getMapaRespuestas().get(respuesta);</span>
+            }
+        } else {
+<span class="fc" id="L364">            return false;</span>
+        }
+    }
+
+    public int cantidadTotalPreguntas() {
+<span class="fc" id="L369">        int suma = this.getListaPreguntasCortaRespuesta().size();</span>
+<span class="fc" id="L370">        suma += this.getListaPreguntasMultipleOpcion().size();</span>
+<span class="fc" id="L371">        suma += this.getListaPreguntasVF().size();</span>
+<span class="fc" id="L372">        return suma;</span>
+    }
+
+    public ArrayList&lt;Pregunta&gt; getListaTodasLasPreguntas() {
+<span class="fc" id="L376">        ArrayList&lt;Pregunta&gt; listaDeTodasLasPreguntas </span>
+                = new ArrayList&lt;&gt;();
+<span class="fc" id="L378">        listaDeTodasLasPreguntas = agregarTodasLasPreguntas();</span>
+
+<span class="fc" id="L380">        return listaDeTodasLasPreguntas;</span>
+    }
+
+    private ArrayList&lt;Pregunta&gt; agregarTodasLasPreguntas() {
+<span class="fc" id="L384">        ArrayList&lt;Pregunta&gt; listaDePreguntas = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L385">        Iterator it = this.getListaPreguntasCortaRespuesta().</span>
+<span class="fc" id="L386">                iterator();</span>
+<span class="pc bpc" id="L387" title="1 of 2 branches missed.">        while (it.hasNext()) {</span>
+<span class="nc" id="L388">            listaDePreguntas.add((Pregunta) it.next());</span>
+        }
+<span class="fc" id="L390">        it = this.getListaPreguntasVF().iterator();</span>
+<span class="pc bpc" id="L391" title="1 of 2 branches missed.">        while (it.hasNext()) {</span>
+<span class="nc" id="L392">            listaDePreguntas.add((Pregunta) it.next());</span>
+        }
+<span class="fc" id="L394">        it = this.getListaPreguntasMultipleOpcion().iterator();</span>
+<span class="pc bpc" id="L395" title="1 of 2 branches missed.">        while (it.hasNext()) {</span>
+<span class="nc" id="L396">            listaDePreguntas.add((Pregunta) it.next());</span>
+        }
+<span class="fc" id="L398">        return listaDePreguntas;</span>
+    }
+
+    public boolean procesarRespuestaSeleccionada(Pregunta p, 
+            String respuestaSeleccionada) {
+<span class="fc" id="L403">        boolean valorVerdad = false;</span>
+<span class="fc" id="L404">        String respuesta = &quot;&quot;;</span>
+<span class="fc" id="L405">        boolean hayRespuestaCorrecta = false;</span>
+<span class="pc bpc" id="L406" title="1 of 2 branches missed.">        if (!respuestaSeleccionada.contains(&quot;4c6f6c69&quot;)) {</span>
+<span class="pc bpc" id="L407" title="1 of 2 branches missed.">            if (p instanceof PreguntaVF) {</span>
+<span class="fc" id="L408">                respuesta = respuestaSeleccionada.toUpperCase();</span>
+<span class="fc" id="L409">                valorVerdad = respuesta.contains(&quot;V&quot;);</span>
+<span class="pc bpc" id="L410" title="1 of 2 branches missed.">                if (valorVerdad) {</span>
+<span class="nc" id="L411">                    respuesta = &quot;true&quot;;</span>
+                } else {
+<span class="fc" id="L413">                    respuesta = &quot;false&quot;;</span>
+                }
+<span class="nc bnc" id="L415" title="All 2 branches missed.">            } else if (p instanceof PreguntaMultipleOpcion) {</span>
+<span class="nc" id="L416">                respuesta = respuestaSeleccionada;</span>
+<span class="nc bnc" id="L417" title="All 2 branches missed.">            } else if (p instanceof PreguntaCortaRespuesta) {</span>
+<span class="nc" id="L418">                respuesta = respuestaSeleccionada;</span>
+            } else {
+<span class="nc" id="L420">                System.err.println(&quot;Fatal error&quot;);</span>
+<span class="nc bnc" id="L421" title="All 2 branches missed.">                assert false;</span>
+            }
+<span class="pc bpc" id="L423" title="1 of 2 branches missed.">            if (p instanceof PreguntaCortaRespuesta) {</span>
+<span class="nc" id="L424">                for (int i = 0; i </span>
+<span class="nc bnc" id="L425" title="All 2 branches missed.">                        &lt; p.getMapaRespuestas().size(); i++) {</span>
+<span class="nc" id="L426">                    if (p.getMapaRespuestas().</span>
+<span class="nc bnc" id="L427" title="All 2 branches missed.">                            get(respuestaSeleccionada) != null) {</span>
+<span class="nc" id="L428">                        valorVerdad = true;</span>
+                    }
+                }
+<span class="nc" id="L431">                hayRespuestaCorrecta = veracidadRespuesta(p, </span>
+                        respuesta, valorVerdad);
+            } else {
+<span class="fc" id="L434">                hayRespuestaCorrecta = veracidadRespuesta(p, </span>
+                        respuesta, valorVerdad);
+            }
+        } else {
+<span class="nc" id="L438">            hayRespuestaCorrecta = veracidadRespuesta(p, null, </span>
+                    true);
+        }
+<span class="fc" id="L441">        return hayRespuestaCorrecta;</span>
+    }
+
+    public boolean crearReporte() {
+<span class="fc" id="L445">        boolean creadoCorrectamente = false;</span>
+        try {
+<span class="fc" id="L447">            Document document = new Document();</span>
+<span class="fc" id="L448">            PdfWriter.getInstance(document, </span>
+                    new FileOutputStream(
+                            &quot;src/main/resources/reporte.pdf&quot;));
+<span class="fc" id="L451">            document.open();</span>
+<span class="fc" id="L452">            document.add(new Paragraph(</span>
+<span class="fc" id="L453">                    getRespuestasSeleccionadas().toString()));</span>
+<span class="fc" id="L454">            document.close();</span>
+<span class="nc" id="L455">        } catch (Exception e) {</span>
+<span class="nc" id="L456">            System.out.println(e);</span>
+<span class="fc" id="L457">        }</span>
+<span class="fc" id="L458">        return creadoCorrectamente;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

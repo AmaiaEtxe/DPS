@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VentanaPrincipalController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Obligatorio</a> &gt; <a href="index.source.html" class="el_package">com.barrios_irabedra.obligatorio.controladores</a> &gt; <span class="el_source">VentanaPrincipalController.java</span></div><h1>VentanaPrincipalController.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.barrios_irabedra.obligatorio.controladores;
+
+import com.barrios_irabedra.obligatorio.dominio.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.util.*;
+import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
+/**
+ * FXML Controller class
+ *
+ * @author Usuario
+ */
+<span class="nc" id="L45">public class VentanaPrincipalController implements Initializable {</span>
+
+<span class="nc" id="L47">    private Button[][] matrizBotones = new Button[8][8];</span>
+<span class="nc" id="L48">    private Button b = new Button();</span>
+<span class="nc" id="L49">    private Button btnPivot = new Button();</span>
+<span class="nc" id="L50">    private int panelAntesDeAyuda = 0;</span>
+
+    @FXML
+    private Pane paneDragAndDrop;
+    @FXML
+    private Button btnComenzar;
+    @FXML
+    private Pane panelJuego;
+    @FXML
+    private Pane panelTextoDragAndDrop;
+    @FXML
+    private GridPane gridPaneCaminosPreguntas;
+    @FXML
+    private Text textPreguntaVF;
+    @FXML
+    private Button btnRespuestaVerdadera;
+    @FXML
+    private Button btnRespuestaFalsa;
+    @FXML
+    private Pane panePreguntaVF;
+    @FXML
+    private Pane panePreguntaMo;
+    @FXML
+    private Text textPreguntaMo;
+    @FXML
+    private Button btnRespuestaA;
+    @FXML
+    private Button btnRespuestaD;
+    @FXML
+    private Button btnRespuestaB;
+    @FXML
+    private Button btnRespuestaC;
+    @FXML
+    private Pane panePreguntaCortaRespuesta;
+    @FXML
+    private Text textPreguntaCortaRespuesta;
+    @FXML
+    private TextField txtFieldRespuestaCorta;
+    @FXML
+    private Button btnSubmitRespuestaCorta;
+    @FXML
+    private Label labelTimer;
+    @FXML
+    private Label labelTimerMo;
+    @FXML
+    private Label labelTimerCortaRespuesta;
+    @FXML
+    private Pane paneGifCorrecto;
+    @FXML
+    private Pane paneGiftIncorrecto;
+    @FXML
+    private Button btnContinuarEnGifCorrecto;
+    @FXML
+    private Button btnContinuarEnGifInCorrecto;
+    @FXML
+    private Text txtPreguntasDropeadas;
+    @FXML
+    private Pane paneTxtCantPreg;
+    @FXML
+    private Pane paneAyuda;
+    @FXML
+    private Pane paneOpcionesDerecha;
+    @FXML
+    private Button btnAyuda;
+    @FXML
+    private Button tbnVolverAlQuizz;
+    @FXML
+    private Button btnAcabar;
+    @FXML
+    private Button btnGenerarReporte;
+    @FXML
+    private Pane paneTituloDelJuego;
+    @FXML
+    private Pane txtErrorCargar;
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+<span class="nc" id="L130">        panelJuego.setVisible(false);</span>
+<span class="nc" id="L131">        paneDragAndDrop.setVisible(true);</span>
+<span class="nc" id="L132">        btnComenzar.setVisible(true);</span>
+<span class="nc" id="L133">        panelTextoDragAndDrop.setVisible(true);</span>
+<span class="nc" id="L134">        paneTxtCantPreg.setVisible(true);</span>
+<span class="nc" id="L135">    }</span>
+
+    @FXML
+    private void handleDragOver(DragEvent event) {
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (event.getDragboard().hasFiles()) {</span>
+<span class="nc" id="L140">            event.acceptTransferModes(TransferMode.ANY);</span>
+        }
+<span class="nc" id="L142">    }</span>
+
+    @FXML
+    private void handleDrop(DragEvent event) {
+<span class="nc" id="L146">        List&lt;File&gt; files = event.getDragboard().getFiles();</span>
+<span class="nc" id="L147">        Sistema.getInstance().recibirArchivos(files);</span>
+<span class="nc" id="L148">        int contPreguntaS = Sistema.getInstance().</span>
+<span class="nc" id="L149">                getListaTodasLasPreguntas().size();</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if (contPreguntaS &lt; 39) {</span>
+<span class="nc" id="L151">            txtPreguntasDropeadas.setText(</span>
+                    &quot;Preguntas cargadas: &quot; 
+                            + contPreguntaS + &quot;/39&quot;);
+        } else {
+<span class="nc" id="L155">            txtPreguntasDropeadas.setText(</span>
+                    &quot;Preguntas cargadas: 39/39&quot;);
+        }
+<span class="nc" id="L158">    }</span>
+
+    @FXML
+    private void actionBtnComenzar(ActionEvent event) {
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        if (Sistema.getInstance().cantidadTotalPreguntas() &gt; 0) {</span>
+<span class="nc" id="L163">            crearMatrizBotones();</span>
+<span class="nc" id="L164">            asignoPreguntaBoton();</span>
+<span class="nc" id="L165">            panelTextoDragAndDrop.setVisible(false);</span>
+<span class="nc" id="L166">            paneDragAndDrop.setVisible(false);</span>
+<span class="nc" id="L167">            btnComenzar.setVisible(false);</span>
+<span class="nc" id="L168">            panePreguntaVF.setVisible(false);</span>
+<span class="nc" id="L169">            panelTextoDragAndDrop.setVisible(false);</span>
+<span class="nc" id="L170">            panePreguntaMo.setVisible(false);</span>
+<span class="nc" id="L171">            panePreguntaCortaRespuesta.setVisible(false);</span>
+<span class="nc" id="L172">            paneGifCorrecto.setVisible(false);</span>
+<span class="nc" id="L173">            paneGiftIncorrecto.setVisible(false);</span>
+<span class="nc" id="L174">            paneTxtCantPreg.setVisible(false);</span>
+<span class="nc" id="L175">            paneAyuda.setVisible(false);</span>
+<span class="nc" id="L176">            paneOpcionesDerecha.setVisible(true);</span>
+<span class="nc" id="L177">            paneTituloDelJuego.setVisible(true);</span>
+<span class="nc" id="L178">            gridPaneCaminosPreguntas.setVisible(true);</span>
+<span class="nc" id="L179">            panelJuego.setVisible(true);</span>
+<span class="nc" id="L180">            playuSonidoMenu();</span>
+        }
+<span class="nc" id="L182">    }</span>
+
+    private void crearMatrizBotones() {
+        Integer fil;
+        Integer col;
+<span class="nc bnc" id="L187" title="All 2 branches missed.">        for (Node child : this.</span>
+<span class="nc" id="L188">                gridPaneCaminosPreguntas.getChildren()) {</span>
+<span class="nc" id="L189">            fil = this.gridPaneCaminosPreguntas.</span>
+<span class="nc" id="L190">                    getRowIndex(child);</span>
+<span class="nc" id="L191">            col = this.gridPaneCaminosPreguntas.</span>
+<span class="nc" id="L192">                    getColumnIndex(child);</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">            int f = fil == null ? 0 : fil;</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">            int c = col == null ? 0 : col;</span>
+<span class="nc bnc" id="L195" title="All 4 branches missed.">            if (fil != null &amp;&amp; col != null) {</span>
+<span class="nc bnc" id="L196" title="All 4 branches missed.">                if (f == fil &amp;&amp; c == col) {</span>
+<span class="nc" id="L197">                    this.matrizBotones[fil - 1][col - 1] </span>
+                            = (Button) child;
+                }
+            }
+<span class="nc" id="L201">        }</span>
+<span class="nc" id="L202">    }</span>
+
+    private void asignoPreguntaBoton() {
+<span class="nc" id="L205">        int cantP = Sistema.getInstance().cantidadTotalPreguntas();</span>
+<span class="nc" id="L206">        int contP = cantP;</span>
+<span class="nc" id="L207">        int contador = 0;</span>
+        ArrayList&lt;Pregunta&gt; listaPreguntas = Sistema.
+<span class="nc" id="L209">                getInstance().getListaTodasLasPreguntas();</span>
+<span class="nc" id="L210">        Iterator it = listaPreguntas.iterator();</span>
+<span class="nc" id="L211">        for (int i = 7; i &gt;= 0 </span>
+<span class="nc bnc" id="L212" title="All 6 branches missed.">                &amp;&amp; (cantP &gt;= 0) &amp;&amp; it.hasNext(); i--) {</span>
+<span class="nc" id="L213">            this.matrizBotones[i][0].setUserData(it.next());</span>
+<span class="nc" id="L214">            activar(matrizBotones[i][0]);</span>
+<span class="nc" id="L215">            contador++;</span>
+<span class="nc" id="L216">            cantP--;</span>
+        }
+<span class="nc" id="L218">        for (int i = 1; i &lt; 8 </span>
+<span class="nc bnc" id="L219" title="All 6 branches missed.">                &amp;&amp; cantP &gt;= 0 &amp;&amp; it.hasNext(); i++) {</span>
+<span class="nc" id="L220">            this.matrizBotones[0][i].setUserData(it.next());</span>
+<span class="nc" id="L221">            activar(matrizBotones[0][i]);</span>
+<span class="nc" id="L222">            contador++;</span>
+<span class="nc" id="L223">            cantP--;</span>
+        }
+<span class="nc" id="L225">        for (int i = 1; i &lt; 8 </span>
+<span class="nc bnc" id="L226" title="All 6 branches missed.">                &amp;&amp; cantP &gt;= 0 &amp;&amp; it.hasNext(); i++) {</span>
+<span class="nc" id="L227">            this.matrizBotones[i][7].setUserData(it.next());</span>
+<span class="nc" id="L228">            activar(matrizBotones[i][7]);</span>
+<span class="nc" id="L229">            contador++;</span>
+<span class="nc" id="L230">            cantP--;</span>
+        }
+<span class="nc" id="L232">        for (int i = 6; i &gt; 1 </span>
+<span class="nc bnc" id="L233" title="All 6 branches missed.">                &amp;&amp; cantP &gt;= 0 &amp;&amp; it.hasNext(); i--) {</span>
+<span class="nc" id="L234">            this.matrizBotones[7][i].setUserData(it.next());</span>
+<span class="nc" id="L235">            activar(matrizBotones[7][i]);</span>
+<span class="nc" id="L236">            contador++;</span>
+<span class="nc" id="L237">            cantP--;</span>
+        }
+<span class="nc" id="L239">        for (int i = 6; i &gt; 1 </span>
+<span class="nc bnc" id="L240" title="All 6 branches missed.">                &amp;&amp; cantP &gt;= 0 &amp;&amp; it.hasNext(); i--) {</span>
+<span class="nc" id="L241">            this.matrizBotones[i][2].setUserData(it.next());</span>
+<span class="nc" id="L242">            activar(matrizBotones[i][2]);</span>
+<span class="nc" id="L243">            contador++;</span>
+<span class="nc" id="L244">            cantP--;</span>
+        }
+<span class="nc" id="L246">        for (int i = 3; i &lt; 6 </span>
+<span class="nc bnc" id="L247" title="All 6 branches missed.">                &amp;&amp; cantP &gt;= 0 &amp;&amp; it.hasNext(); i++) {</span>
+<span class="nc" id="L248">            this.matrizBotones[2][i].setUserData(it.next());</span>
+<span class="nc" id="L249">            activar(matrizBotones[2][i]);</span>
+<span class="nc" id="L250">            contador++;</span>
+<span class="nc" id="L251">            cantP--;</span>
+        }
+<span class="nc" id="L253">        for (int i = 3; i &lt; 6 </span>
+<span class="nc bnc" id="L254" title="All 6 branches missed.">                &amp;&amp; cantP &gt;= 0 &amp;&amp; it.hasNext(); i++) {</span>
+<span class="nc" id="L255">            this.matrizBotones[i][5].setUserData(it.next());</span>
+<span class="nc" id="L256">            activar(matrizBotones[i][5]);</span>
+<span class="nc" id="L257">            contador++;</span>
+<span class="nc" id="L258">            cantP--;</span>
+        }
+<span class="nc bnc" id="L260" title="All 4 branches missed.">        if (cantP &gt;= 0 &amp;&amp; it.hasNext()) {</span>
+<span class="nc" id="L261">            this.matrizBotones[5][4].setUserData(it.next());</span>
+<span class="nc" id="L262">            activar(matrizBotones[5][4]);</span>
+<span class="nc" id="L263">            contador++;</span>
+<span class="nc" id="L264">            cantP--;</span>
+        }
+<span class="nc bnc" id="L266" title="All 2 branches missed.">        if (cantP == 0) {</span>
+<span class="nc" id="L267">            desactivarElRestoDeBotones(contador);</span>
+        }
+<span class="nc" id="L269">    }</span>
+
+    private void desactivarElRestoDeBotones(int contador) {
+<span class="nc bnc" id="L272" title="All 2 branches missed.">        for (int i = 7; i &gt;= 0; i--) {</span>
+<span class="nc bnc" id="L273" title="All 2 branches missed.">            if (contador == 0) {</span>
+<span class="nc" id="L274">                matrizBotones[i][0].setStyle(</span>
+                        &quot;-fx-background-color: #696969&quot;);
+<span class="nc" id="L276">                matrizBotones[i][0].setDisable(true);</span>
+            } else {
+<span class="nc" id="L278">                contador--;</span>
+            }
+        }
+<span class="nc bnc" id="L281" title="All 2 branches missed.">        for (int i = 1; i &lt; 8; i++) {</span>
+<span class="nc bnc" id="L282" title="All 2 branches missed.">            if (contador == 0) {</span>
+<span class="nc" id="L283">                matrizBotones[0][i].setStyle(</span>
+                        &quot;-fx-background-color: #696969&quot;);
+<span class="nc" id="L285">                matrizBotones[0][i].setDisable(true);</span>
+            } else {
+<span class="nc" id="L287">                contador--;</span>
+            }
+        }
+<span class="nc bnc" id="L290" title="All 2 branches missed.">        for (int i = 1; i &lt; 8; i++) {</span>
+<span class="nc bnc" id="L291" title="All 2 branches missed.">            if (contador == 0) {</span>
+<span class="nc" id="L292">                matrizBotones[i][7].setStyle(</span>
+                        &quot;-fx-background-color: #696969&quot;);
+<span class="nc" id="L294">                matrizBotones[i][7].setDisable(true);</span>
+            } else {
+<span class="nc" id="L296">                contador--;</span>
+            }
+        }
+<span class="nc bnc" id="L299" title="All 2 branches missed.">        for (int i = 6; i &gt; 1; i--) {</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">            if (contador == 0) {</span>
+<span class="nc" id="L301">                matrizBotones[7][i].setStyle(</span>
+                        &quot;-fx-background-color: #696969&quot;);
+<span class="nc" id="L303">                matrizBotones[7][i].setDisable(true);</span>
+            } else {
+<span class="nc" id="L305">                contador--;</span>
+            }
+        }
+<span class="nc bnc" id="L308" title="All 2 branches missed.">        for (int i = 6; i &gt; 1; i--) {</span>
+<span class="nc bnc" id="L309" title="All 2 branches missed.">            if (contador == 0) {</span>
+<span class="nc" id="L310">                matrizBotones[i][2].setStyle(</span>
+                        &quot;-fx-background-color: #696969&quot;);
+<span class="nc" id="L312">                matrizBotones[i][2].setDisable(true);</span>
+            } else {
+<span class="nc" id="L314">                contador--;</span>
+            }
+        }
+<span class="nc bnc" id="L317" title="All 2 branches missed.">        for (int i = 3; i &lt; 6; i++) {</span>
+<span class="nc bnc" id="L318" title="All 2 branches missed.">            if (contador == 0) {</span>
+<span class="nc" id="L319">                matrizBotones[2][i].setStyle(</span>
+                        &quot;-fx-background-color: #696969&quot;);
+<span class="nc" id="L321">                matrizBotones[2][i].setDisable(true);</span>
+            } else {
+<span class="nc" id="L323">                contador--;</span>
+            }
+        }
+<span class="nc bnc" id="L326" title="All 2 branches missed.">        for (int i = 3; i &lt; 6; i++) {</span>
+<span class="nc bnc" id="L327" title="All 2 branches missed.">            if (contador == 0) {</span>
+<span class="nc" id="L328">                matrizBotones[i][5].setStyle(</span>
+                        &quot;-fx-background-color: #696969&quot;);
+<span class="nc" id="L330">                matrizBotones[i][5].setDisable(true);</span>
+            } else {
+<span class="nc" id="L332">                contador--;</span>
+            }
+        }
+<span class="nc bnc" id="L335" title="All 2 branches missed.">        if (contador == 0) {</span>
+<span class="nc" id="L336">            matrizBotones[5][4].setStyle(</span>
+                    &quot;-fx-background-color: #696969&quot;);
+<span class="nc" id="L338">            matrizBotones[5][4].setDisable(true);</span>
+        } else {
+<span class="nc" id="L340">            contador--;</span>
+        }
+<span class="nc" id="L342">    }</span>
+
+    private void activar(final Button b) {
+<span class="nc" id="L345">        b.setOnAction(new EventHandler&lt;ActionEvent&gt;() {</span>
+            @Override
+            public void handle(ActionEvent event) {
+<span class="nc" id="L348">                Pregunta p = (Pregunta) b.getUserData();</span>
+<span class="nc" id="L349">                btnGenerarReporte.setDisable(true);</span>
+<span class="nc bnc" id="L350" title="All 2 branches missed.">                if (p instanceof PreguntaVF) {</span>
+<span class="nc" id="L351">                    iniciarPreguntaVF(p);</span>
+<span class="nc" id="L352">                    btnPivot = b;</span>
+<span class="nc bnc" id="L353" title="All 2 branches missed.">                } else if (p instanceof PreguntaCortaRespuesta) {</span>
+<span class="nc" id="L354">                    iniciarPreguntaCortaRespuesta(p);</span>
+<span class="nc" id="L355">                    btnPivot = b;</span>
+<span class="nc bnc" id="L356" title="All 2 branches missed.">                } else if (p instanceof PreguntaMultipleOpcion) {</span>
+<span class="nc" id="L357">                    iniciarPreguntaMo(p);</span>
+<span class="nc" id="L358">                    btnPivot = b;</span>
+                }
+<span class="nc" id="L360">            }</span>
+
+        });
+<span class="nc" id="L363">    }</span>
+
+    private void iniciarPreguntaCortaRespuesta(Pregunta p) {
+<span class="nc" id="L366">        gridPaneCaminosPreguntas.setVisible(false);</span>
+<span class="nc" id="L367">        paneTituloDelJuego.setVisible(false);</span>
+<span class="nc" id="L368">        btnAcabar.setDisable(true);</span>
+<span class="nc" id="L369">        panePreguntaCortaRespuesta.setVisible(true);</span>
+<span class="nc" id="L370">        textPreguntaCortaRespuesta.setText(p.getPregunta());</span>
+<span class="nc" id="L371">        btnSubmitRespuestaCorta.setUserData(p);</span>
+<span class="nc" id="L372">        labelTimerCortaRespuesta.textProperty().</span>
+<span class="nc" id="L373">                bind(p.getSegundosRestantes().asString());</span>
+<span class="nc" id="L374">        p.start();</span>
+<span class="nc" id="L375">    }</span>
+
+    private void iniciarPreguntaMo(Pregunta p) {
+<span class="nc" id="L378">        gridPaneCaminosPreguntas.setVisible(false);</span>
+<span class="nc" id="L379">        paneTituloDelJuego.setVisible(false);</span>
+<span class="nc" id="L380">        btnAcabar.setDisable(true);</span>
+<span class="nc" id="L381">        panePreguntaMo.setVisible(true);</span>
+<span class="nc" id="L382">        textPreguntaMo.setText(p.getPregunta());</span>
+<span class="nc" id="L383">        btnRespuestaA.setText((String) p.</span>
+<span class="nc" id="L384">                getMapaRespuestas().keySet().toArray()[3]);</span>
+<span class="nc" id="L385">        btnRespuestaB.setText((String) p.</span>
+<span class="nc" id="L386">                getMapaRespuestas().keySet().toArray()[2]);</span>
+<span class="nc" id="L387">        btnRespuestaC.setText((String) p.</span>
+<span class="nc" id="L388">                getMapaRespuestas().keySet().toArray()[1]);</span>
+<span class="nc" id="L389">        btnRespuestaD.setText((String) p.</span>
+<span class="nc" id="L390">                getMapaRespuestas().keySet().toArray()[0]);</span>
+<span class="nc" id="L391">        btnRespuestaA.setUserData(p);</span>
+<span class="nc" id="L392">        btnRespuestaB.setUserData(p);</span>
+<span class="nc" id="L393">        btnRespuestaC.setUserData(p);</span>
+<span class="nc" id="L394">        btnRespuestaD.setUserData(p);</span>
+<span class="nc" id="L395">        labelTimerMo.textProperty().bind(p.</span>
+<span class="nc" id="L396">                getSegundosRestantes().asString());</span>
+<span class="nc" id="L397">        p.start();</span>
+
+<span class="nc" id="L399">    }</span>
+
+    private void iniciarPreguntaVF(Pregunta p) {
+<span class="nc" id="L402">        gridPaneCaminosPreguntas.setVisible(false);</span>
+<span class="nc" id="L403">        paneTituloDelJuego.setVisible(false);</span>
+<span class="nc" id="L404">        btnAcabar.setDisable(true);</span>
+<span class="nc" id="L405">        panePreguntaVF.setVisible(true);</span>
+<span class="nc" id="L406">        textPreguntaVF.setText(p.getPregunta());</span>
+<span class="nc" id="L407">        btnRespuestaVerdadera.setUserData(p);</span>
+<span class="nc" id="L408">        btnRespuestaFalsa.setUserData(p);</span>
+<span class="nc" id="L409">        labelTimer.textProperty().bind(p.</span>
+<span class="nc" id="L410">                getSegundosRestantes().asString());</span>
+<span class="nc" id="L411">        p.start();</span>
+<span class="nc" id="L412">    }</span>
+
+    @FXML
+    private void onActionRespuestaV(ActionEvent event) {
+<span class="nc" id="L416">        PreguntaVF p </span>
+                = (PreguntaVF) btnRespuestaVerdadera.
+<span class="nc" id="L418">                        getUserData();</span>
+<span class="nc" id="L419">        int checkTiempo = Integer.parseInt(p.</span>
+<span class="nc" id="L420">                getSegundosRestantes().asString().get());</span>
+<span class="nc bnc" id="L421" title="All 2 branches missed.">        if (checkTiempo &gt; 0) {</span>
+<span class="nc bnc" id="L422" title="All 2 branches missed.">            if (procesarRespuestaVF(p, &quot;V&quot;)) {</span>
+<span class="nc" id="L423">                mostrarGifYSonidoCorrecto(p);</span>
+            } else {
+<span class="nc" id="L425">                mostrarGifYSonidoIncorrecto(p);</span>
+            }
+        } else {
+<span class="nc" id="L428">            procesarRespuestaFueraDeTiempo(p, &quot;4c6f6c69&quot;);</span>
+<span class="nc" id="L429">            mostrarGifYSonidoIncorrecto(p);</span>
+        }
+<span class="nc" id="L431">    }</span>
+
+    private void procesarRespuestaFueraDeTiempo(Pregunta p, 
+            String respuesta) {
+<span class="nc" id="L435">        Sistema.getInstance().procesarRespuestaSeleccionada(p, </span>
+                respuesta);
+<span class="nc" id="L437">        btnPivot.setStyle(&quot;-fx-background-color: #000f3f&quot;);</span>
+<span class="nc" id="L438">        btnPivot.setDisable(true);</span>
+<span class="nc" id="L439">    }</span>
+
+    private boolean procesarRespuestaVF(PreguntaVF p, 
+            String respuestaSeleccionada) {
+        boolean check;
+<span class="nc" id="L444">        if (Sistema.getInstance().</span>
+<span class="nc bnc" id="L445" title="All 2 branches missed.">                procesarRespuestaSeleccionada(p, </span>
+                        respuestaSeleccionada)) {
+<span class="nc" id="L447">            btnPivot.setStyle(&quot;-fx-background-color: #01a8e2&quot;);</span>
+<span class="nc" id="L448">            check = true;</span>
+        } else {
+<span class="nc" id="L450">            btnPivot.setStyle(&quot;-fx-background-color: #000f3f&quot;);</span>
+<span class="nc" id="L451">            check = false;</span>
+        }
+<span class="nc" id="L453">        btnPivot.setDisable(true);</span>
+<span class="nc" id="L454">        return check;</span>
+    }
+
+    @FXML
+    private void onActionRespuestaF(ActionEvent event) {
+<span class="nc" id="L459">        PreguntaVF p </span>
+                = (PreguntaVF) btnRespuestaVerdadera.
+<span class="nc" id="L461">                        getUserData();</span>
+<span class="nc" id="L462">        int checkTiempo = Integer.parseInt(p.</span>
+<span class="nc" id="L463">                getSegundosRestantes().asString().get());</span>
+<span class="nc bnc" id="L464" title="All 2 branches missed.">        if (checkTiempo &gt; 0) {</span>
+<span class="nc bnc" id="L465" title="All 2 branches missed.">            if (procesarRespuestaVF(p, &quot;F&quot;)) {</span>
+<span class="nc" id="L466">                mostrarGifYSonidoCorrecto(p);</span>
+            } else {
+<span class="nc" id="L468">                mostrarGifYSonidoIncorrecto(p);</span>
+            }
+        } else {
+<span class="nc" id="L471">            procesarRespuestaFueraDeTiempo(p, &quot;4c6f6c69&quot;);</span>
+<span class="nc" id="L472">            mostrarGifYSonidoIncorrecto(p);</span>
+        }
+<span class="nc" id="L474">    }</span>
+
+    @FXML
+    private void onActionbtnRespuestaA(ActionEvent event) {
+<span class="nc" id="L478">        PreguntaMultipleOpcion p </span>
+<span class="nc" id="L479">                = (PreguntaMultipleOpcion) btnPivot.getUserData();</span>
+<span class="nc" id="L480">        String respuestaSeleccionada </span>
+<span class="nc" id="L481">                = (String) p.getMapaRespuestas().</span>
+<span class="nc" id="L482">                        keySet().toArray()[3];</span>
+<span class="nc" id="L483">        int checkTiempo = Integer.parseInt(p.</span>
+<span class="nc" id="L484">                getSegundosRestantes().asString().get());</span>
+<span class="nc bnc" id="L485" title="All 2 branches missed.">        if (checkTiempo &gt; 0) {</span>
+<span class="nc bnc" id="L486" title="All 2 branches missed.">            if (procesarRespuestaMo(p, respuestaSeleccionada)) {</span>
+<span class="nc" id="L487">                mostrarGifYSonidoCorrecto(p);</span>
+            } else {
+<span class="nc" id="L489">                mostrarGifYSonidoIncorrecto(p);</span>
+            }
+        } else {
+<span class="nc" id="L492">            procesarRespuestaFueraDeTiempo(p, &quot;4c6f6c69&quot;);</span>
+<span class="nc" id="L493">            mostrarGifYSonidoIncorrecto(p);</span>
+        }
+<span class="nc" id="L495">    }</span>
+
+    @FXML
+    private void onActionBtnRespuestaB(ActionEvent event) {
+<span class="nc" id="L499">        PreguntaMultipleOpcion p </span>
+                = (PreguntaMultipleOpcion) btnPivot.
+<span class="nc" id="L501">                        getUserData();</span>
+<span class="nc" id="L502">        String respuestaSeleccionada </span>
+<span class="nc" id="L503">                = (String) p.getMapaRespuestas().keySet().</span>
+<span class="nc" id="L504">                        toArray()[2];</span>
+<span class="nc" id="L505">        int checkTiempo = Integer.parseInt(p.</span>
+<span class="nc" id="L506">                getSegundosRestantes().asString().get());</span>
+<span class="nc bnc" id="L507" title="All 2 branches missed.">        if (checkTiempo &gt; 0) {</span>
+<span class="nc bnc" id="L508" title="All 2 branches missed.">            if (procesarRespuestaMo(p, respuestaSeleccionada)) {</span>
+<span class="nc" id="L509">                mostrarGifYSonidoCorrecto(p);</span>
+            } else {
+<span class="nc" id="L511">                mostrarGifYSonidoIncorrecto(p);</span>
+            }
+        } else {
+<span class="nc" id="L514">            procesarRespuestaFueraDeTiempo(p, &quot;4c6f6c69&quot;);</span>
+<span class="nc" id="L515">            mostrarGifYSonidoIncorrecto(p);</span>
+        }
+<span class="nc" id="L517">    }</span>
+
+    @FXML
+    private void onActionBtnRespuestaC(ActionEvent event) {
+<span class="nc" id="L521">        PreguntaMultipleOpcion p </span>
+                = (PreguntaMultipleOpcion) btnPivot.
+<span class="nc" id="L523">                        getUserData();</span>
+<span class="nc" id="L524">        String respuestaSeleccionada </span>
+<span class="nc" id="L525">                = (String) p.getMapaRespuestas().keySet().</span>
+<span class="nc" id="L526">                        toArray()[1];</span>
+<span class="nc" id="L527">        int checkTiempo = Integer.parseInt(p.</span>
+<span class="nc" id="L528">                getSegundosRestantes().asString().get());</span>
+<span class="nc bnc" id="L529" title="All 2 branches missed.">        if (checkTiempo &gt; 0) {</span>
+<span class="nc bnc" id="L530" title="All 2 branches missed.">            if (procesarRespuestaMo(p, respuestaSeleccionada)) {</span>
+<span class="nc" id="L531">                mostrarGifYSonidoCorrecto(p);</span>
+            } else {
+<span class="nc" id="L533">                mostrarGifYSonidoIncorrecto(p);</span>
+            }
+        } else {
+<span class="nc" id="L536">            procesarRespuestaFueraDeTiempo(p, &quot;4c6f6c69&quot;);</span>
+<span class="nc" id="L537">            mostrarGifYSonidoIncorrecto(p);</span>
+        }
+<span class="nc" id="L539">    }</span>
+
+    @FXML
+    private void onActionBtnRespuestaD(ActionEvent event) {
+<span class="nc" id="L543">        PreguntaMultipleOpcion p </span>
+<span class="nc" id="L544">                = (PreguntaMultipleOpcion) btnPivot.getUserData();</span>
+<span class="nc" id="L545">        String respuestaSeleccionada </span>
+<span class="nc" id="L546">                = (String) p.getMapaRespuestas().keySet().</span>
+<span class="nc" id="L547">                        toArray()[0];</span>
+<span class="nc" id="L548">        int checkTiempo = Integer.parseInt(p.</span>
+<span class="nc" id="L549">                getSegundosRestantes().asString().get());</span>
+<span class="nc bnc" id="L550" title="All 2 branches missed.">        if (checkTiempo &gt; 0) {</span>
+<span class="nc bnc" id="L551" title="All 2 branches missed.">            if (procesarRespuestaMo(p, respuestaSeleccionada)) {</span>
+<span class="nc" id="L552">                mostrarGifYSonidoCorrecto(p);</span>
+            } else {
+<span class="nc" id="L554">                mostrarGifYSonidoIncorrecto(p);</span>
+            }
+        } else {
+<span class="nc" id="L557">            procesarRespuestaFueraDeTiempo(p, &quot;4c6f6c69&quot;);</span>
+<span class="nc" id="L558">            mostrarGifYSonidoIncorrecto(p);</span>
+        }
+<span class="nc" id="L560">    }</span>
+
+    private void mostrarGifYSonidoCorrecto(Pregunta p) {
+<span class="nc bnc" id="L563" title="All 2 branches missed.">        if (p instanceof PreguntaVF) {</span>
+<span class="nc" id="L564">            panePreguntaVF.setVisible(false);</span>
+<span class="nc" id="L565">            btnRespuestaVerdadera.</span>
+<span class="nc" id="L566">                    getProperties().clear();</span>
+            //Limpia el map generado por el setUserData
+<span class="nc" id="L568">            btnRespuestaFalsa.getProperties().clear();</span>
+<span class="nc bnc" id="L569" title="All 2 branches missed.">        } else if (p instanceof PreguntaMultipleOpcion) {</span>
+<span class="nc" id="L570">            panePreguntaMo.setVisible(false);</span>
+<span class="nc" id="L571">            btnRespuestaA.getProperties().clear();</span>
+<span class="nc" id="L572">            btnRespuestaB.getProperties().clear();</span>
+<span class="nc" id="L573">            btnRespuestaC.getProperties().clear();</span>
+<span class="nc" id="L574">            btnRespuestaD.getProperties().clear();</span>
+<span class="nc bnc" id="L575" title="All 2 branches missed.">        } else if (p instanceof PreguntaCortaRespuesta) {</span>
+<span class="nc" id="L576">            panePreguntaCortaRespuesta.setVisible(false);</span>
+<span class="nc" id="L577">            btnRespuestaA.getProperties().clear();</span>
+        }
+<span class="nc" id="L579">        paneGifCorrecto.setVisible(true);</span>
+<span class="nc" id="L580">        playAudioCorrecto();</span>
+<span class="nc" id="L581">    }</span>
+
+    private void playAudioCorrecto() {
+        InputStream in;
+<span class="nc" id="L585">        btnPivot.setText(&quot;✓&quot;);</span>
+        try {
+<span class="nc" id="L587">            in = new FileInputStream(</span>
+                    new File(&quot;src/main/resources/styles/ok.wav&quot;));
+<span class="nc" id="L589">            AudioStream audioOk = new AudioStream(in);</span>
+<span class="nc" id="L590">            AudioPlayer.player.start(audioOk);</span>
+<span class="nc" id="L591">        } catch (Exception e) {</span>
+<span class="nc" id="L592">        }</span>
+<span class="nc" id="L593">    }</span>
+
+    private void playAudioIncorrecto() {
+        InputStream in;
+<span class="nc" id="L597">        btnPivot.setText(&quot;X&quot;);</span>
+        try {
+<span class="nc" id="L599">            in = new FileInputStream(new File(</span>
+                    &quot;src/main/resources/styles/Wrong.wav&quot;));
+<span class="nc" id="L601">            AudioStream audioOk = new AudioStream(in);</span>
+<span class="nc" id="L602">            AudioPlayer.player.start(audioOk);</span>
+<span class="nc" id="L603">        } catch (Exception e) {</span>
+<span class="nc" id="L604">        }</span>
+<span class="nc" id="L605">    }</span>
+
+    private void mostrarGifYSonidoIncorrecto(Pregunta p) {
+<span class="nc bnc" id="L608" title="All 2 branches missed.">        if (p instanceof PreguntaVF) {</span>
+<span class="nc" id="L609">            panePreguntaVF.setVisible(false);</span>
+<span class="nc" id="L610">            btnRespuestaVerdadera.getProperties().clear();</span>
+//Limpia el map generado por el setUserData
+<span class="nc" id="L612">            btnRespuestaFalsa.getProperties().clear();</span>
+<span class="nc bnc" id="L613" title="All 2 branches missed.">        } else if (p instanceof PreguntaMultipleOpcion) {</span>
+<span class="nc" id="L614">            panePreguntaMo.setVisible(false);</span>
+<span class="nc" id="L615">            btnRespuestaA.getProperties().clear();</span>
+<span class="nc" id="L616">            btnRespuestaB.getProperties().clear();</span>
+<span class="nc" id="L617">            btnRespuestaC.getProperties().clear();</span>
+<span class="nc" id="L618">            btnRespuestaD.getProperties().clear();</span>
+<span class="nc bnc" id="L619" title="All 2 branches missed.">        } else if (p instanceof PreguntaCortaRespuesta) {</span>
+<span class="nc" id="L620">            panePreguntaCortaRespuesta.setVisible(false);</span>
+<span class="nc" id="L621">            btnRespuestaA.getProperties().clear();</span>
+        }
+<span class="nc" id="L623">        paneGiftIncorrecto.setVisible(true);</span>
+<span class="nc" id="L624">        playAudioIncorrecto();</span>
+<span class="nc" id="L625">    }</span>
+
+    private boolean procesarRespuestaMo(
+            PreguntaMultipleOpcion p, 
+            String respuestaSeleccionada) {
+        boolean check;
+<span class="nc" id="L631">        if (Sistema.getInstance().</span>
+<span class="nc bnc" id="L632" title="All 2 branches missed.">                procesarRespuestaSeleccionada(p, </span>
+                        respuestaSeleccionada)) {
+<span class="nc" id="L634">            btnPivot.setStyle(&quot;-fx-background-color: #01a8e2&quot;);</span>
+<span class="nc" id="L635">            check = true;</span>
+        } else {
+<span class="nc" id="L637">            btnPivot.setStyle(&quot;-fx-background-color: #000f3f&quot;);</span>
+<span class="nc" id="L638">            check = false;</span>
+        }
+<span class="nc" id="L640">        btnPivot.setDisable(true);</span>
+<span class="nc" id="L641">        return check;</span>
+    }
+
+    @FXML
+    private void onActionBtnSubmit(ActionEvent event) {
+<span class="nc" id="L646">        String respuestaSeleccionada </span>
+<span class="nc" id="L647">                = txtFieldRespuestaCorta.getText();</span>
+<span class="nc bnc" id="L648" title="All 2 branches missed.">        if (!&quot;&quot;.equals(respuestaSeleccionada)) {</span>
+<span class="nc" id="L649">            PreguntaCortaRespuesta p </span>
+                    = (PreguntaCortaRespuesta) btnPivot.
+<span class="nc" id="L651">                            getUserData();</span>
+<span class="nc" id="L652">            int checkTiempo = Integer.parseInt(p.</span>
+<span class="nc" id="L653">                    getSegundosRestantes().asString().get());</span>
+<span class="nc bnc" id="L654" title="All 2 branches missed.">            if (checkTiempo &gt; 0) {</span>
+<span class="nc bnc" id="L655" title="All 2 branches missed.">                if (procesarRespuestaCortaRespuesta(p, </span>
+                        respuestaSeleccionada)) {
+<span class="nc" id="L657">                    mostrarGifYSonidoCorrecto(p);</span>
+                } else {
+<span class="nc" id="L659">                    mostrarGifYSonidoIncorrecto(p);</span>
+                }
+            } else {
+<span class="nc" id="L662">                procesarRespuestaFueraDeTiempo(p, &quot;4c6f6c69&quot;);</span>
+<span class="nc" id="L663">                mostrarGifYSonidoIncorrecto(p);</span>
+            }
+        }
+<span class="nc" id="L666">    }</span>
+
+    private boolean procesarRespuestaCortaRespuesta(
+            PreguntaCortaRespuesta p, 
+            String respuestaSeleccionada) {
+        boolean check;
+<span class="nc" id="L672">        if (Sistema.getInstance().</span>
+<span class="nc bnc" id="L673" title="All 2 branches missed.">                procesarRespuestaSeleccionada(p, </span>
+                        respuestaSeleccionada)) {
+<span class="nc" id="L675">            btnPivot.setStyle(&quot;-fx-background-color: #01a8e2&quot;);</span>
+<span class="nc" id="L676">            check = true;</span>
+        } else {
+<span class="nc" id="L678">            btnPivot.setStyle(&quot;-fx-background-color: #000f3f&quot;);</span>
+<span class="nc" id="L679">            check = false;</span>
+        }
+<span class="nc" id="L681">        btnPivot.setDisable(true);</span>
+<span class="nc" id="L682">        return check;</span>
+    }
+
+    @FXML
+    private void onActionContinuarEnGifCorrecto(
+            ActionEvent event) {
+<span class="nc" id="L688">        paneGifCorrecto.setVisible(false);</span>
+<span class="nc" id="L689">        btnAcabar.setDisable(false);</span>
+<span class="nc" id="L690">        btnGenerarReporte.setDisable(false);</span>
+<span class="nc" id="L691">        gridPaneCaminosPreguntas.setVisible(true);</span>
+<span class="nc" id="L692">        paneTituloDelJuego.setVisible(true);</span>
+<span class="nc" id="L693">    }</span>
+
+    @FXML
+    private void onActionContinuarEnGifInCorrecto(
+            ActionEvent event) {
+<span class="nc" id="L698">        paneGiftIncorrecto.setVisible(false);</span>
+<span class="nc" id="L699">        btnAcabar.setDisable(false);</span>
+<span class="nc" id="L700">        btnGenerarReporte.setDisable(false);</span>
+<span class="nc" id="L701">        gridPaneCaminosPreguntas.setVisible(true);</span>
+<span class="nc" id="L702">        paneTituloDelJuego.setVisible(true);</span>
+<span class="nc" id="L703">    }</span>
+
+    @FXML
+    private void onActionBotonAyuda(ActionEvent event) {
+<span class="nc" id="L707">        paneOpcionesDerecha.setVisible(false);</span>
+<span class="nc bnc" id="L708" title="All 2 branches missed.">        if (gridPaneCaminosPreguntas.isVisible()) {</span>
+<span class="nc" id="L709">            panelAntesDeAyuda = 0;</span>
+<span class="nc bnc" id="L710" title="All 2 branches missed.">        } else if (panePreguntaCortaRespuesta.isVisible()) {</span>
+<span class="nc" id="L711">            panelAntesDeAyuda = 1;</span>
+<span class="nc bnc" id="L712" title="All 2 branches missed.">        } else if (panePreguntaMo.isVisible()) {</span>
+<span class="nc" id="L713">            panelAntesDeAyuda = 2;</span>
+<span class="nc bnc" id="L714" title="All 2 branches missed.">        } else if (panePreguntaVF.isVisible()) {</span>
+<span class="nc" id="L715">            panelAntesDeAyuda = 3;</span>
+        }
+<span class="nc bnc" id="L717" title="All 5 branches missed.">        switch (panelAntesDeAyuda) {</span>
+            case 0:
+<span class="nc" id="L719">                gridPaneCaminosPreguntas.setVisible(false);</span>
+<span class="nc" id="L720">                paneTituloDelJuego.setVisible(false);</span>
+<span class="nc" id="L721">                break;</span>
+            case 1:
+<span class="nc" id="L723">                panePreguntaCortaRespuesta.setVisible(false);</span>
+<span class="nc" id="L724">                break;</span>
+            case 2:
+<span class="nc" id="L726">                panePreguntaMo.setVisible(false);</span>
+<span class="nc" id="L727">                break;</span>
+            case 3:
+<span class="nc" id="L729">                panePreguntaVF.setVisible(false);</span>
+                break;
+        }
+<span class="nc" id="L732">        paneAyuda.setVisible(true);</span>
+<span class="nc" id="L733">    }</span>
+
+    @FXML
+    private void onActionBbnVolverAlQuizz(ActionEvent event) {
+<span class="nc" id="L737">        paneAyuda.setVisible(false);</span>
+<span class="nc bnc" id="L738" title="All 5 branches missed.">        switch (panelAntesDeAyuda) {</span>
+            case 0:
+<span class="nc" id="L740">                gridPaneCaminosPreguntas.setVisible(true);</span>
+<span class="nc" id="L741">                paneTituloDelJuego.setVisible(true);</span>
+<span class="nc" id="L742">                break;</span>
+            case 1:
+<span class="nc" id="L744">                panePreguntaCortaRespuesta.setVisible(true);</span>
+<span class="nc" id="L745">                break;</span>
+            case 2:
+<span class="nc" id="L747">                panePreguntaMo.setVisible(true);</span>
+<span class="nc" id="L748">                break;</span>
+            case 3:
+<span class="nc" id="L750">                panePreguntaVF.setVisible(true);</span>
+                break;
+        }
+<span class="nc" id="L753">        paneOpcionesDerecha.setVisible(true);</span>
+<span class="nc" id="L754">    }</span>
+
+    @FXML
+    private void onActionbtnAcabar(ActionEvent event) {
+<span class="nc" id="L758">        sonidoExit();</span>
+        try {
+<span class="nc" id="L760">            TimeUnit.SECONDS.sleep(4);</span>
+<span class="nc" id="L761">        } catch (InterruptedException ex) {</span>
+<span class="nc" id="L762">        }</span>
+<span class="nc" id="L763">        System.exit(911);</span>
+<span class="nc" id="L764">    }</span>
+
+    private void sonidoExit() {
+        InputStream in;
+        try {
+<span class="nc" id="L769">            in = new FileInputStream(new File(</span>
+                    &quot;src/main/resources/styles/Exit.wav&quot;));
+<span class="nc" id="L771">            AudioStream audioOk = new AudioStream(in);</span>
+<span class="nc" id="L772">            AudioPlayer.player.start(audioOk);</span>
+<span class="nc" id="L773">        } catch (Exception e) {</span>
+<span class="nc" id="L774">        }</span>
+<span class="nc" id="L775">    }</span>
+
+    private void playuSonidoMenu() {
+
+        try {
+<span class="nc" id="L780">            File musicPath = new File(</span>
+                    &quot;src/main/resources/styles/&quot;
+                            + &quot;sonidoEspiral.wav&quot;);
+<span class="nc" id="L783">            AudioInputStream audioInput </span>
+<span class="nc" id="L784">                    = AudioSystem.getAudioInputStream(musicPath);</span>
+<span class="nc" id="L785">            Clip clip = AudioSystem.getClip();</span>
+<span class="nc" id="L786">            clip.open(audioInput);</span>
+<span class="nc" id="L787">            clip.start();</span>
+<span class="nc" id="L788">            clip.loop(Clip.LOOP_CONTINUOUSLY);</span>
+
+<span class="nc" id="L790">        } catch (Exception e) {</span>
+<span class="nc" id="L791">        }</span>
+<span class="nc" id="L792">    }</span>
+
+    @FXML
+    private void onActionBtnGenerarReporte(ActionEvent event) {
+<span class="nc" id="L796">        if (Sistema.getInstance().</span>
+<span class="nc bnc" id="L797" title="All 2 branches missed.">                getRespuestasSeleccionadas().size() &gt; 0) {</span>
+<span class="nc" id="L798">            Sistema.getInstance().crearReporte();</span>
+        }
+<span class="nc" id="L800">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

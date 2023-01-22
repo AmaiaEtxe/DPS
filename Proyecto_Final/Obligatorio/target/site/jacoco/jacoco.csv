@@ -1,0 +1,11 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Obligatorio,com.barrios_irabedra.obligatorio.controladores,VentanaPrincipalController.new EventHandler() {...},61,0,6,0,13,0,5,0,2,0
+Obligatorio,com.barrios_irabedra.obligatorio.controladores,VentanaPrincipalController,1583,0,166,0,431,0,121,0,35,0
+Obligatorio,com.barrios_irabedra.obligatorio.dominio,Pregunta,58,74,0,0,18,21,8,8,8,8
+Obligatorio,com.barrios_irabedra.obligatorio.dominio,PreguntaVF,0,27,0,0,0,7,0,3,0,3
+Obligatorio,com.barrios_irabedra.obligatorio.dominio,PreguntaMultipleOpcion,0,45,0,0,0,11,0,5,0,5
+Obligatorio,com.barrios_irabedra.obligatorio.dominio,Sistema,333,411,47,35,90,126,39,37,8,22
+Obligatorio,com.barrios_irabedra.obligatorio.dominio,PreguntaCortaRespuesta,0,27,0,0,0,7,0,3,0,3
+Obligatorio,com.barrios_irabedra.obligatorio.dominio,Pregunta.TimerPregunta,13,6,2,0,4,1,2,1,1,1
+Obligatorio,com.barrios_irabedra.obligatorio,FXMLController,4,0,0,0,2,0,2,0,2,0
+Obligatorio,com.barrios_irabedra.obligatorio,MainApp,27,0,0,0,9,0,3,0,3,0
