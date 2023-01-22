@@ -1,0 +1,4 @@
+::Pregunta:: sentencia {T}
+::Pregunta:: sentencia {T}
+::Pregunta:: sentencia {T}
+::Pregunta:: sentencia {T}

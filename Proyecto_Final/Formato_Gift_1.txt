@@ -1,0 +1,52 @@
+//Línea de comentario 
+::Título de la pregunta 
+::Pregunta{
+=Una respuesta correcta
+~Respuesta equivocada1
+#A comentario a la respuesta equivocada1
+~Respuesta equivocada2
+#A comentario a la respuesta equivocada2
+~Respuesta equivocada3
+#A comentario a la respuesta equivocada3
+~Respuesta equivocada4
+#A comentario a la respuesta equivocada4
+}
+
+
+¿Quién está sepultado en la tumba de Grant?{=Grant =Ulysses S. Grant =Ulysses Grant}
+
+
+// falso/verdadero
+::Q1:: 1+1= 2 {T}
+
+
+
+
+
+¿Quién está sepultado en la tumba de Grant?{=Grant =Ulysses S. Grant =Ulysses Grant} 
+
+
+::Título de la pregunta 
+::Pregunta{
+=Una respuesta correcta
+~Respuesta equivocada1
+#A comentario a la respuesta equivocada1
+~Respuesta equivocada2
+#A comentario a la respuesta equivocada2
+~Respuesta equivocada3
+#A comentario a la respuesta equivocada3
+~Respuesta equivocada4
+#A comentario a la respuesta equivocada4
+}
+
+
+
+
+::Q1:: 1+1= 2 {T}
+
+
+
+¿Quién está sepultado en la tumba de Grant?{=Grant =Ulysses S. Grant =Ulysses Grant}
+::Q1:: 1+1= 2 {T}
+¿Quién está sepultado en la tumba de Grant?{=Grant =Ulysses S. Grant =Ulysses Grant}
+::Q1:: 1+1= 2 {T}
