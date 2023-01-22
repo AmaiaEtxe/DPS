@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1100.0" styleClass="bodybg" stylesheets="@../styles/styleVentanaPrincipal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.barrios_irabedra.obligatorio.controladores.VentanaPrincipalController">
+   <children>
+      <Pane fx:id="panelJuego" layoutX="50.0" layoutY="50.0" prefHeight="700.0" prefWidth="1000.0" styleClass="bodybg" stylesheets="@../styles/stylePanelJuego.css">
+         <children>
+            <Pane fx:id="paneOpcionesDerecha" layoutX="862.0" prefHeight="700.0" prefWidth="138.0" style="-fx-background-color: #03787f;">
+               <children>
+                  <Button fx:id="btnAyuda" layoutX="35.0" layoutY="75.0" mnemonicParsing="false" onAction="#onActionBotonAyuda" prefHeight="69.0" prefWidth="69.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" text="Ayuda" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="14.0" />
+                     </font></Button>
+                  <Button fx:id="btnAcabar" layoutX="35.0" layoutY="213.0" mnemonicParsing="false" onAction="#onActionbtnAcabar" prefHeight="69.0" prefWidth="69.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" text="Acabar" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="14.0" />
+                     </font></Button>
+                  <Slider layoutX="62.0" layoutY="383.0" orientation="VERTICAL" />
+                  <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="46.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="btnGenerarReporte" layoutX="35.0" layoutY="567.0" mnemonicParsing="false" onAction="#onActionBtnGenerarReporte" prefHeight="69.0" prefWidth="69.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" text="Reporte" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></Pane>
+            <GridPane fx:id="gridPaneCaminosPreguntas" layoutX="131.0" layoutY="50.0" prefHeight="540.0" prefWidth="540.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="8" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="8" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="8" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="6" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="8" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="5" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="6" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="8" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="8" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" text="Button" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="4" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="5" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="6" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="7" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="108.0" textFill="#61eaff" GridPane.columnIndex="8" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+               </children>
+            </GridPane>
+            <Pane fx:id="panePreguntaVF" layoutY="-3.0" prefHeight="706.0" prefWidth="858.0" visible="false">
+               <children>
+                  <Pane layoutX="58.0" layoutY="65.0" prefHeight="60.0" prefWidth="743.0">
+                     <children>
+                        <Text fx:id="textPreguntaVF" fill="#61eaff" layoutX="18.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="706.13671875">
+                           <font>
+                              <Font name="Segoe UI Light" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Button fx:id="btnRespuestaVerdadera" layoutX="44.0" layoutY="353.0" mnemonicParsing="false" onAction="#onActionRespuestaV" prefHeight="77.0" prefWidth="743.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" text="Verdadero" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="26.0" />
+                     </font></Button>
+                  <Button fx:id="btnRespuestaFalsa" layoutX="44.0" layoutY="515.0" mnemonicParsing="false" onAction="#onActionRespuestaF" prefHeight="77.0" prefWidth="743.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" text="Falso" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="26.0" />
+                     </font></Button>
+                  <Label fx:id="labelTimer" layoutX="757.0" layoutY="25.0" prefHeight="53.0" prefWidth="60.0" textFill="#03787f">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="36.0" />
+                     </font></Label>
+               </children>
+            </Pane>
+            <Pane fx:id="panePreguntaMo" layoutX="-2.0" layoutY="-4.0" prefHeight="706.0" prefWidth="858.0" visible="false">
+               <children>
+                  <Pane layoutX="58.0" layoutY="55.0" prefHeight="47.0" prefWidth="743.0">
+                     <children>
+                        <Text fx:id="textPreguntaMo" fill="#61eaff" layoutX="18.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="706.13671875">
+                           <font>
+                              <Font name="Segoe UI Light" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Button fx:id="btnRespuestaA" layoutX="58.0" layoutY="269.0" mnemonicParsing="false" onAction="#onActionbtnRespuestaA" prefHeight="38.0" prefWidth="743.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="26.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnRespuestaD" layoutX="58.0" layoutY="603.0" mnemonicParsing="false" onAction="#onActionBtnRespuestaD" prefHeight="38.0" prefWidth="743.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="26.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnRespuestaC" layoutX="58.0" layoutY="491.0" mnemonicParsing="false" onAction="#onActionBtnRespuestaC" prefHeight="38.0" prefWidth="743.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="26.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="labelTimerMo" layoutX="771.0" layoutY="14.0" prefHeight="53.0" prefWidth="60.0" textFill="#03787f">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnRespuestaB" layoutX="58.0" layoutY="376.0" mnemonicParsing="false" onAction="#onActionBtnRespuestaB" prefHeight="38.0" prefWidth="743.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="26.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane fx:id="panePreguntaCortaRespuesta" layoutX="-5.0" layoutY="-4.0" prefHeight="706.0" prefWidth="867.0" visible="false">
+               <children>
+                  <Pane layoutX="62.0" layoutY="56.0" prefHeight="47.0" prefWidth="743.0">
+                     <children>
+                        <Text fx:id="textPreguntaCortaRespuesta" fill="#61eaff" layoutX="18.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="706.13671875">
+                           <font>
+                              <Font name="Segoe UI Light" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <TextField fx:id="txtFieldRespuestaCorta" layoutX="62.0" layoutY="353.0" prefHeight="25.0" prefWidth="557.0" styleClass="bodybg" stylesheets="@../styles/styleTextFiled.css">
+                     <font>
+                        <Font name="Segoe UI Light" size="12.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="btnSubmitRespuestaCorta" layoutX="643.0" layoutY="351.0" mnemonicParsing="false" onAction="#onActionBtnSubmit" prefHeight="24.0" prefWidth="139.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" text="OK" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="labelTimerCortaRespuesta" layoutX="782.0" layoutY="27.0" prefHeight="53.0" prefWidth="60.0" textFill="#03787f">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="paneGifCorrecto" layoutX="8.0" prefHeight="700.0" prefWidth="851.0" visible="false">
+               <children>
+                  <Button fx:id="btnContinuarEnGifCorrecto" layoutX="355.0" layoutY="518.0" mnemonicParsing="false" onAction="#onActionContinuarEnGifCorrecto" prefHeight="94.0" prefWidth="116.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" text="Continuar" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="14.0" />
+                     </font>
+                  </Button>
+                  <ImageView cache="true" fitHeight="344.0" fitWidth="430.0" layoutX="213.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../styles/oie_1722248PRCPm3z1.gif" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+            <Pane fx:id="paneGiftIncorrecto" layoutX="-5.0" layoutY="-2.0" prefHeight="706.0" prefWidth="867.0" visible="false">
+               <children>
+                  <ImageView fitHeight="582.0" fitWidth="534.0" layoutX="185.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../styles/SingleArtisticDeermouse-small.gif" />
+                     </image></ImageView>
+                  <Button fx:id="btnContinuarEnGifInCorrecto" layoutX="376.0" layoutY="523.0" mnemonicParsing="false" onAction="#onActionContinuarEnGifInCorrecto" prefHeight="94.0" prefWidth="116.0" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" text="Continuar" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane fx:id="paneAyuda" layoutX="-2.0" layoutY="-6.0" prefHeight="706.0" prefWidth="1007.0" visible="false">
+               <children>
+                  <Line endX="135.0" endY="510.0" layoutX="200.0" layoutY="196.0" startX="135.0" startY="-196.0" />
+                  <Line endX="135.0" endY="549.0" layoutX="538.0" layoutY="157.0" startX="135.0" startY="-157.0" />
+                  <ImageView fitHeight="270.0" fitWidth="557.0" layoutX="2.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../styles/capturaPreguntaMo.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="264.0" fitWidth="326.0" layoutX="342.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../styles/capturaPreguntaVF.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="270.0" fitWidth="324.0" layoutX="674.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../styles/capturaPreguntaCR.jpg" />
+                     </image>
+                  </ImageView>
+                  <Text fill="#61eaff" layoutX="2.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="En la esquina superior derecha vas a ver un timer.  Tenés el tiempo indicado para seleccionar una de las opciones. Luego de responder, verás si la respuesta fue correcta y en tiempo. De no responder en tiempo será incorrecta. Luego volverás a la ventana anterior y seleccionar otra pregunta." textAlignment="CENTER" wrappingWidth="333.4383949637413">
+                     <font>
+                        <Font name="Segoe UI Light" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#61eaff" layoutX="342.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="En el caso de pregunta verdadero o falso, pasa lo mismo que en múltiple opción." textAlignment="CENTER" wrappingWidth="306.13671875">
+                     <font>
+                        <Font name="Segoe UI Light" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#61eaff" layoutX="681.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="En el caso pregunta corta respuesta, debes escribir tu respuesta y luego hacer click en el botón OK. No te olvides que importan las mayúsculas." textAlignment="CENTER" wrappingWidth="317.1882301568985">
+                     <font>
+                        <Font name="Segoe UI Light" size="18.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="tbnVolverAlQuizz" layoutX="468.0" layoutY="592.0" mnemonicParsing="false" onAction="#onActionBbnVolverAlQuizz" styleClass="bodybg" stylesheets="@../styles/styleBtnRespuestas.css" text="Volver" textFill="#61eaff">
+                     <font>
+                        <Font name="Segoe UI Light" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane fx:id="paneTituloDelJuego" layoutX="186.0" layoutY="14.0" prefHeight="60.0" prefWidth="485.0">
+               <children>
+                  <Text fill="#61eaff" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LA ESPIRAL" textAlignment="CENTER" wrappingWidth="484.9999964237213">
+                     <font>
+                        <Font name="Segoe UI Light" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#61eaff" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¡Has sido encerrado en la espiral! Responde a las preguntas de todos los botones para salir." textAlignment="CENTER" wrappingWidth="484.9999964237213">
+                     <font>
+                        <Font name="Segoe UI Light" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </children></Pane>
+      <Pane fx:id="paneDragAndDrop" layoutX="340.0" layoutY="143.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="400.0" prefWidth="400.0" styleClass="bodybg" stylesheets="@../styles/stylesPaneDragAndDrop.css" visible="false">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="125.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../styles/mail-1454731_960_720.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <Button fx:id="btnComenzar" layoutX="470.0" layoutY="585.0" mnemonicParsing="false" onAction="#actionBtnComenzar" prefHeight="47.0" prefWidth="139.0" styleClass="bodybg" stylesheets="@../styles/stylebtnComenzar.css" text="¡Comenzar!" textFill="#61eaff" visible="false">
+         <font>
+            <Font name="Segoe UI Light" size="20.0" />
+         </font>
+      </Button>
+      <Pane fx:id="panelTextoDragAndDrop" layoutX="340.0" layoutY="22.0" prefHeight="94.0" prefWidth="400.0" styleClass="bodybg" stylesheets="@../styles/stylebtnComenzar.css" visible="false">
+         <children>
+            <Text fill="#61eaff" fontSmoothingType="LCD" layoutX="16.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrastrá todos los archivos que quieras" textAlignment="CENTER" wrappingWidth="367.13671875">
+               <font>
+                  <Font name="Segoe UI Light" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#61eaff" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Para cargar preguntas, tenés que arrastrar archivos de texto escritos en formato GIFT. " textAlignment="CENTER" wrappingWidth="399.99999552965164">
+               <font>
+                  <Font name="Segoe UI Light" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="paneTxtCantPreg" layoutX="758.0" layoutY="180.0" prefHeight="287.0" prefWidth="320.0" visible="false">
+         <children>
+            <Text fx:id="txtPreguntasDropeadas" fill="#61eaff" layoutX="-10.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="334.00000001490116">
+               <font>
+                  <Font name="Segoe UI Light" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#61eaff" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Podés cargar hasta 39 preguntas." textAlignment="CENTER" wrappingWidth="319.9999898672104">
+               <font>
+                  <Font name="Segoe UI Light" size="18.0" />
+               </font>
+            </Text>
+            <Pane fx:id="txtErrorCargar" layoutX="57.0" layoutY="154.0" prefHeight="39.0" prefWidth="200.0" visible="false">
+               <children>
+                  <Text fill="#61eaff" layoutX="-45.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No se han podido cargar preguntas" textAlignment="CENTER" wrappingWidth="323.9999860525131">
+                     <font>
+                        <Font name="Segoe UI Light" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
