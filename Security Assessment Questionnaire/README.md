@@ -1,1 +1,1 @@
-Análisis de cuestionarios de evaluación de segurdiad propuestos por la asignatura
+Análisis de cuestionarios de evaluación de seguridad propuestos por la asignatura
