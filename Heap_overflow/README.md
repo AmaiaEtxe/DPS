@@ -31,6 +31,7 @@ La primera dirección del heap será 0x405000 hasta 0x426000, por lo tanto, impr
 ```
 
 ![4](Capturas/4.png)
+Pasando!!
 
 Podemos identificar que a partir de la dirección 0x4052a0 se comienza a almacenar nuestro input -> '0x61616161'. Ahora buscaremos la dirección de la función 'f_espero_fuera' y comprobaremos con este valor en qué posición del heap se encuentra. Está dirección del heap nos servirá para saber hasta donde tendremos que rellenar el input de caracteres e introducir la dirección a la función que queremos que se ejecute, que en este caso será 'f_entrar'.
 
